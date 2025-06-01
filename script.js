@@ -1,6 +1,7 @@
 import { Field } from "./classes/field.js";
 import { Hero } from "./classes/hero.js";
 import { Invaders_container } from "./classes/invaders_container.js";
+import { Shield } from "./classes/shields.js";
 // Declare global variables:
 var main_color = `#000000`
 
@@ -23,4 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Instantiate the hero:
     let hero = new Hero(8, 3, "hero_tag", field_tag)
     hero.create()
+
+    // Instantiate the shields:
+    let shields = new Shield(60, 8, "shields", field_tag)
+    shields.create()
+    shields.add_shields()
+    console.log(shields.element);
+    
 })
