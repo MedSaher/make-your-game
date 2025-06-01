@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     hero.move_hero()
 
     // Instantiate the shields:
-    let shields = new Shield(60, 8, "shields", field_tag)
+    let shields = new Shield(60, 6, "shields", field_tag)
     shields.create()
     shields.add_shields()
     console.log(shields.element);

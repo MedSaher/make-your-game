@@ -8,8 +8,8 @@ export class Hero extends Field {
 
     document.addEventListener('keydown', (event) => {
       // Get bounding rectangles fresh on each key press:
-      let fieldRect = this.parent_element.getBoundingClientRect();
-      let heroRect = this.element.getBoundingClientRect();
+      let fieldRect = get_position(this.parent_element);
+      let heroRect = get_position(this.element);
 
       const heroWidth = heroRect.width;
       const fieldLeft = fieldRect.left;

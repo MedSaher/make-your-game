@@ -10,8 +10,6 @@ export class Field {
         this.element = null
     }
 
-
-
     // Create the html representation:
     create() {
         let container = document.createElement("div")
