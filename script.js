@@ -24,11 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Instantiate the hero:
     let hero = new Hero(8, 3, "hero_tag", field_tag)
     hero.create()
+    hero.move_hero()
 
     // Instantiate the shields:
     let shields = new Shield(60, 8, "shields", field_tag)
     shields.create()
     shields.add_shields()
     console.log(shields.element);
-    
 })

@@ -7,7 +7,7 @@ export class Field {
         this.background_color = background_color
         this.image_path = image_path
         this.type = type
-        // this.element = null
+        this.element = null
     }
 
 
@@ -29,16 +29,16 @@ export class Field {
             console.log(type)
         }
         this.parent_element.appendChild(container)
-        // this.element = this.parent_element
+        this.element = container
     }
 
     create_score_displayer() {
-        let container = document.getElementsByClassName(this.tag_class)[0]
+        // let container = document.getElementsByClassName(this.tag_class)[0]
         let advancement = document.createElement("div")
         advancement.setAttribute("id", "game_advancement")
         advancement.style.width = `${this.width}vmin`
         advancement.style.height = `${20}vmin`
         advancement.style.willChange = "transform";
-        container.insertBefore(advancement, container.firstChild);
+        this.element.insertBefore(advancement, this.element.firstChild);
     }
 }
