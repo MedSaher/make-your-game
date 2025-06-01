@@ -18,3 +18,32 @@ body {
     width: 100vw;
     min-height: 100vh;
 }
+
+
+.battle_field {
+    position: relative;
+    /* background-color: #f0f0f0; */
+}
+
+.invaders_container {
+    position: absolute;
+    border: 1px white solid;
+    left: calc((100% - 40vmin) / 2);
+    top: 22vmin;
+}
+
+#game_advancement {
+    border: 1px white solid;
+}
+
+.invaders_section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.type {
+    border: 1px white solid;
+}

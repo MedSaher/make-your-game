@@ -1,9 +1,21 @@
 import { Field } from "./classes/field.js";
+import { Invaders_container } from "./classes/invaders_container.js";
+// Declare global variables:
+var main_color = `#000000`
+
+
 
 let grand_parent = document.body
 
-document.addEventListener("DOMContentLoaded", ()=>{
-//Instantiate the field class:
-let field = new Field(60, 60, "battle_field", grand_parent)
-field.Create()
+document.addEventListener("DOMContentLoaded", () => {
+    //Instantiate the field class:
+    let field = new Field(60, 80, "battle_field", grand_parent, main_color)
+    field.create()
+    field.create_score_displayer()
+    let field_tag = document.getElementsByClassName("battle_field")[0]
+    console.log(field_tag);
+    let space_invaders = new Invaders_container(40, 22, "invaders_container", field_tag)
+    space_invaders.create()
+    let invaders_container = document.getElementsByClassName("invaders_container")[0]
+    space_invaders.add_invaders(invaders_container)
 })
