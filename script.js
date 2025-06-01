@@ -1,4 +1,5 @@
 import { Field } from "./classes/field.js";
+import { Hero } from "./classes/hero.js";
 import { Invaders_container } from "./classes/invaders_container.js";
 // Declare global variables:
 var main_color = `#000000`
@@ -18,4 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     space_invaders.create()
     let invaders_container = document.getElementsByClassName("invaders_container")[0]
     space_invaders.add_invaders(invaders_container)
+
+    // Instantiate the hero:
+    let hero = new Hero(8, 3, "hero_tag", field_tag)
+    hero.create()
 })

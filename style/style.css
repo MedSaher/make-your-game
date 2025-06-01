@@ -32,10 +32,6 @@ body {
     top: 22vmin;
 }
 
-#game_advancement {
-    border: 1px white solid;
-}
-
 .invaders_section {
     display: flex;
     flex-direction: row;
@@ -43,6 +39,19 @@ body {
     align-items: center;
     gap: 2px;
 }
+
+.hero_tag{
+    position: absolute;
+     border: 1px white solid;
+    left: calc((100% - 8vmin) / 2);
+    bottom: 2px;
+}
+
+
+#game_advancement {
+    border: 1px white solid;
+}
+
 
 .type {
     border: 1px white solid;
