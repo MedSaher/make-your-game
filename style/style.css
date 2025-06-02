@@ -96,3 +96,27 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.shields {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2vmin;
+}
+
+.shield {
+  display: grid;
+  grid-template-columns: repeat(12, 0.5vmin);
+  grid-template-rows: repeat(44, 0.5vmin);
+  gap: 0;
+  background-color: transparent;
+}
+
+.shield-cell {
+  width: 0.5vmin;
+  height: 0.5vmin;
+  background-color: transparent;
+}
+
+.shield-cell.active {
+  background-color: green; /* You can change this to match your style */
+}
