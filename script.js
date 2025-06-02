@@ -22,12 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     space_invaders.add_invaders(invaders_container)
 
     // Instantiate the hero:
-    let hero = new Hero(8, 3, "hero_tag", field_tag)
+    let hero = new Hero(3, 2, "hero_tag", field_tag)
     hero.create()
     hero.move_hero()
 
     // Instantiate the shields:
-    let shields = new Shield(60, 6, "shields", field_tag)
+    let shields = new Shield(60, 4, "shields", field_tag)
     shields.create()
     shields.add_shields()
     console.log(shields.element);

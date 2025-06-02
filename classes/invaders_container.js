@@ -12,7 +12,7 @@ export class Invaders_container extends Field {
                 section.style.width = `${100}%`
                 section.style.height = `${this.height/5}vmin`
                 for (let j = 1; j <= 11; j++) {
-                        let invader = new Invader((this.width/11), (this.height/5), `type`, section, null, null, this.type)
+                        let invader = new Invader(((this.width/11)-1), ((this.height/5)-1), `type`, section, null, null, this.type)
                         invader.create()
                 }
                 element.appendChild(section)

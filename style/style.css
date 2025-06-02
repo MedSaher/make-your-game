@@ -22,11 +22,16 @@ body {
 
 .battle_field {
     position: relative;
+    border-bottom: 2px solid #00FF00;
+    color: #00FF00;
+    background-color: black;
+    font-family: monospace;
+    padding-bottom: 4px;
 }
 
 .invaders_container {
     position: absolute;
-    border: 1px white solid;
+    /* border: 1px white solid; */
     left: calc((100% - 40vmin) / 2);
     top: 22vmin;
 }
@@ -36,15 +41,18 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 2px;
+    gap: 1vmin;
 }
 
 .hero_tag {
     position: absolute;
-    border: 1px white solid;
+    /* border: 1px white solid; */
     left: calc((100% - 8vmin) / 2);
-    transition: transform 0.1s ease-out;
-    bottom: 2px;
+    background-image: url("../sprites/Invaders/hero.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    bottom: 2vmin;
 }
 
 .shields {
@@ -53,13 +61,17 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    bottom: 6vmin;
+    bottom: 8vmin;
 }
 
-.shield{
-    width: 14%;
+.shield {
+    width: 10%;
     height: 100%;
-    border: 1px white solid;
+    /* border: 1px white solid; */
+    background-image: url("../sprites/Invaders/shield.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #game_advancement {
@@ -68,5 +80,10 @@ body {
 
 
 .type {
-    border: 1px white solid;
+    /* border: 1px white solid; */
+    background-image: url("../sprites/Invaders/type_4.png");
+    background-size: 70% 70%;
+    /* Stretch image to fill container */
+    background-repeat: no-repeat;
+    background-position: center;
 }
