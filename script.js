@@ -15,14 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
     field.create()
     field.create_score_displayer()
     let field_tag = document.getElementsByClassName("battle_field")[0]
-    console.log(field_tag);
     let space_invaders = new Invaders_container(40, 22, "invaders_container", field_tag)
     space_invaders.create()
     let invaders_container = document.getElementsByClassName("invaders_container")[0]
     space_invaders.add_invaders(invaders_container)
 
     // Instantiate the hero:
-    let hero = new Hero(3, 2, "hero_tag", field_tag)
+    let hero = new Hero(5, 3, "hero_tag", field_tag)
     hero.create()
     hero.move_hero()
 

@@ -61,7 +61,7 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    bottom: 8vmin;
+    bottom: 12vmin;
 }
 
 .shield {
@@ -79,9 +79,18 @@ body {
 }
 
 
-.type {
+.type1 {
     /* border: 1px white solid; */
     background-image: url("../sprites/Invaders/type_4.png");
+    background-size: 70% 70%;
+    /* Stretch image to fill container */
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.type2 {
+    /* border: 1px white solid; */
+    background-image: url("../sprites/Invaders/type-2.png");
     background-size: 70% 70%;
     /* Stretch image to fill container */
     background-repeat: no-repeat;

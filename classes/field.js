@@ -8,6 +8,7 @@ export class Field {
         this.image_path = image_path
         this.type = type
         this.element = null
+        
     }
 
     // Create the html representation:
@@ -34,9 +35,19 @@ export class Field {
         // let container = document.getElementsByClassName(this.tag_class)[0]
         let advancement = document.createElement("div")
         advancement.setAttribute("id", "game_advancement")
-        advancement.style.width = `${this.width}vmin`
+        advancement.style.width = `${this.widthv}vmin`
         advancement.style.height = `${20}vmin`
         advancement.style.willChange = "transform";
         this.element.insertBefore(advancement, this.element.firstChild);
+    }
+    toggleType() {
+        this.type = this.type === "type1" ? "type2" : "type1";
+        console.log(this.element);
+        
+        // Update the DOM accordingly, e.g.:
+        if (this.element) {
+            this.element.classList.remove("type1", "type2");
+            this.element.classList.add(this.type);
+        }
     }
 }
