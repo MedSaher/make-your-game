@@ -15,7 +15,7 @@ export class Shield extends Field {
       shield.setAttribute("id", `shield-${i}`);
 
       // Create 32 x 44 grid cells
-      for (let row = 0; row < 44; row++) {
+      for (let row = 0; row < 10; row++) {
         for (let col = 0; col < 12; col++) {
           const pixel = document.createElement("div");
           pixel.classList.add("shield-cell");
