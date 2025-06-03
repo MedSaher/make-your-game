@@ -29,5 +29,4 @@ document.addEventListener("DOMContentLoaded", () => {
     let shields = new Shield(60, 4, "shields", field_tag)
     shields.create()
     shields.add_shields()
-    console.log(shields.element);
 })

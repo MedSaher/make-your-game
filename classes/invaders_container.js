@@ -1,5 +1,6 @@
 import { Field } from "./field.js";
 import { Invader } from "./invaders.js";
+import { Bullet } from "./bullet.js";
 
 export class Invaders_container extends Field {
     constructor(...args) {
@@ -35,6 +36,8 @@ export class Invaders_container extends Field {
             element.appendChild(section);
             this.sections.push(section);
         }
+        this.dropRandomBullet();
+        setInterval(() => this.dropRandomBullet(), 7500);
         requestAnimationFrame(this.move_invaders.bind(this));
     }
     move_invaders(timestamp) {
@@ -49,9 +52,9 @@ export class Invaders_container extends Field {
             const left = parseFloat(section.style.left || "0");
             const sectionRect = section.getBoundingClientRect();
             const offset = sectionRect.left - containerRect.left;
-
             maxRight = Math.max(maxRight, offset + sectionRect.width);
             minLeft = Math.min(minLeft, offset);
+            return
         });
 
         // Reverse direction if a border is hit
@@ -71,6 +74,29 @@ export class Invaders_container extends Field {
         }
         requestAnimationFrame(this.move_invaders.bind(this));
     }
+    dropRandomBullet() {
+    if (this.invaders.length === 0) return;
+
+    const aliveInvaders = this.invaders.filter(inv => inv.element && inv.element.parentElement);
+    if (aliveInvaders.length === 0) return;
+
+    const randomInvader = aliveInvaders[Math.floor(Math.random() * aliveInvaders.length)];
+
+    const invaderRect = randomInvader.element.getBoundingClientRect();
+    const battlefield = document.querySelector(".battle_field");
+    const battlefieldRect = battlefield.getBoundingClientRect();
+
+    // Compute relative position inside .battle_field
+    const top = invaderRect.top - battlefieldRect.top + invaderRect.height;
+    const left = invaderRect.left - battlefieldRect.left + (invaderRect.width / 2);
+
+    // Create bullet and drop it
+    const bullet = new Bullet(1.2, 2.5, "invader_bullet", battlefield, null, "sprites/Projectiles/ProjectileC_1.png");
+    bullet.drop(top, left);
+}
+
+
+
 
 
 

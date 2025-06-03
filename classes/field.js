@@ -1,4 +1,5 @@
 export class Field {
+    // new Field(60, 80, "battle_field", grand_parent, main_color)
     constructor(width, height, tag_class, parent_element, background_color = null, image_path = null, type = null) {
         this.width = width
         this.height = height
@@ -35,19 +36,10 @@ export class Field {
         // let container = document.getElementsByClassName(this.tag_class)[0]
         let advancement = document.createElement("div")
         advancement.setAttribute("id", "game_advancement")
-        advancement.style.width = `${this.widthv}vmin`
+        advancement.style.width = `${this.width}vmin`
         advancement.style.height = `${20}vmin`
         advancement.style.willChange = "transform";
         this.element.insertBefore(advancement, this.element.firstChild);
     }
-    toggleType() {
-        this.type = this.type === "type1" ? "type2" : "type1";
-        console.log(this.element);
-        
-        // Update the DOM accordingly, e.g.:
-        if (this.element) {
-            this.element.classList.remove("type1", "type2");
-            this.element.classList.add(this.type);
-        }
-    }
+    
 }

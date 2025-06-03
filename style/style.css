@@ -120,3 +120,11 @@ body {
 .shield-cell.active {
   background-color: green; /* You can change this to match your style */
 }
+
+.invader_bullet {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 20;
+}
+
