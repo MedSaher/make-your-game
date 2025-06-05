@@ -37,7 +37,7 @@ export class Invaders_container extends Field {
             this.sections.push(section);
         }
         this.dropRandomBullet();
-        setInterval(() => this.dropRandomBullet(), 7500);
+        setInterval(() => this.dropRandomBullet(), 5000);
         requestAnimationFrame(this.move_invaders.bind(this));
     }
     move_invaders(timestamp) {
@@ -91,7 +91,7 @@ export class Invaders_container extends Field {
     const left = invaderRect.left - battlefieldRect.left + (invaderRect.width / 2);
 
     // Create bullet and drop it
-    const bullet = new Bullet(1.2, 2.5, "invader_bullet", battlefield, null, "sprites/Projectiles/ProjectileC_1.png");
+    const bullet = new Bullet(1, 2, "invader_bullet", battlefield, null, "sprites/Projectiles/ProjectileC_1.png");
     bullet.drop(top, left);
 }
 

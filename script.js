@@ -1,3 +1,4 @@
+import { Bullet } from "./classes/bullet.js";
 import { Field } from "./classes/field.js";
 import { Hero } from "./classes/hero.js";
 import { Invaders_container } from "./classes/invaders_container.js";
@@ -24,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let hero = new Hero(5, 3, "hero_tag", field_tag)
     hero.create()
     hero.move_hero()
+    const bullet = new Bullet(1, 2, "hero_bullet", field_tag, null, "sprites/Projectiles/missile_1.png");
+    bullet.HeroPullsTheTrigger()
+
 
     // Instantiate the shields:
     let shields = new Shield(60, 4, "shields", field_tag)
