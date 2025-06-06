@@ -9,7 +9,6 @@ export class Field {
         this.image_path = image_path
         this.type = type
         this.element = null
-        
     }
 
     // Create the html representation:
@@ -32,14 +31,44 @@ export class Field {
         this.element = container
     }
 
-    create_score_displayer() {
-        // let container = document.getElementsByClassName(this.tag_class)[0]
-        let advancement = document.createElement("div")
-        advancement.setAttribute("id", "game_advancement")
-        advancement.style.width = `${this.width}vmin`
-        advancement.style.height = `${20}vmin`
-        advancement.style.willChange = "transform";
-        this.element.insertBefore(advancement, this.element.firstChild);
-    }
-    
+create_score_displayer() {
+    let advancement = document.createElement("div");
+    advancement.setAttribute("id", "game_advancement");
+    advancement.style.width = `${this.width}vmin`;
+    advancement.style.height = `100px`;
+    advancement.style.willChange = "transform";
+
+    // Score container
+    let score_container = document.createElement("div");
+    score_container.setAttribute("id", "score_container");
+
+    let score = document.createElement("p");
+    score.innerText = "score: ";
+
+    let score_number = document.createElement("span");
+    score_number.setAttribute("id", "score_number");
+    score_number.innerText = "0";
+
+    score_container.append(score, score_number);
+
+    // Attempts container
+    let attempts = document.createElement("div");
+    attempts.setAttribute("id", "attempts_container");
+
+    let lives = document.createElement("p");
+    lives.innerText = "left: ";
+
+    let lives_number = document.createElement("span");
+    lives_number.setAttribute("id", "lives_number");
+    lives_number.innerText = "3";
+
+    attempts.append(lives, lives_number);
+
+    // Append both to advancement container
+    advancement.append(score_container, attempts);
+
+    // Insert at the top of the parent element
+    this.element.insertBefore(advancement, this.element.firstChild);
+}
+
 }

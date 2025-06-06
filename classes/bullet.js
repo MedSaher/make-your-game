@@ -1,9 +1,10 @@
 import { Field } from "./field.js";
 
+var score = 0
+
 export class Bullet extends Field {
-    constructor(width, height, tag_class, parent_element, background_color = null, image_path = null) {
-        super(width, height, tag_class, parent_element, background_color, image_path);
-    }
+
+    #last_call = 0
 
     // Invaders drop the bomb:
     drop(startTop, startLeft) {
@@ -18,13 +19,16 @@ export class Bullet extends Field {
 
     // Hero shoots upward:
     shootUp(startTop, startLeft) {
-        this.create(); // Use Field.create() to render the bullet
-        this.element.style.position = "absolute";
-        this.element.style.top = `${startTop}px`;
-        this.element.style.left = `${startLeft}px`;
+        const now = Date.now();
 
-        // Animate the bullet upward
-        this.kill();
+        if (now - this.#last_call >= 1000) {
+            this.#last_call = now;
+            this.create(); // Use Field.create() to render the bullet
+            this.element.style.position = "absolute";
+            this.element.style.top = `${startTop}px`;
+            this.element.style.left = `${startLeft}px`;
+            this.kill()
+        }
     }
 
     InvaderpullsTrigger() {
@@ -53,6 +57,8 @@ export class Bullet extends Field {
                     const col = parseInt(pixel.dataset.col);
                     const shieldElement = pixel.closest(".shield");  // Find the correct shield container
 
+
+
                     // Destroy only within this specific shield
                     this.destroyShieldPixelAndNeighbors(shieldElement, row, col);
                     this.element.remove(); // remove the bullet
@@ -75,9 +81,15 @@ export class Bullet extends Field {
                     bulletRect.bottom > heroRect.top;
 
                 if (isCollidingWithHero) {
+                    let lives = document.getElementById("lives_number")
+                    let number = parseInt(lives.innerText)
+                    console.log("lives: ", number)
+                    console.log("lives: ", score)
+                    number -= 1
+                    lives.innerText = number
                     setTimeout(() => {
                         heroElement.remove() // remove the hero
-                    }, 500)
+                    }, 1000)
                     this.element.remove(); // remove the bullet
                     return;
                 }
@@ -112,7 +124,7 @@ export class Bullet extends Field {
                     console.log("the top is: ", top, "the left is: ", left);
 
                     // Now this.shootUp works because 'this' is your Bullet instance
-                    this.shootUp(top, left);
+                    this.shootUp(top, left)
                 }
             }
         });
@@ -122,13 +134,13 @@ export class Bullet extends Field {
         const localPixels = shieldElement.querySelectorAll(".shield-cell");
 
         for (let pixel of localPixels) {
-            const r = parseInt(pixel.dataset.row);
-            const c = parseInt(pixel.dataset.col);
+            const r = parseInt(pixel.dataset.row)
+            const c = parseInt(pixel.dataset.col)
 
             // Destroy only this pixel and neighbors in the same shield
             if (Math.abs(r - row) <= 1 && Math.abs(c - col) <= 1) {
-                pixel.classList.remove("shield-cell");
-                pixel.classList.add("inactive"); // Optional CSS for visuals
+                pixel.classList.remove("shield-cell")
+                pixel.classList.add("inactive")
             }
         }
     }
@@ -139,7 +151,10 @@ export class Bullet extends Field {
             if (!this.element) return;
 
             let top = parseFloat(this.element.style.top);
-            top -= 4; // Move upward (decrease top value)
+            let bot = parseFloat(this.element.style.bottom);
+            console.log("top: ", top, "bottom: ", bot);
+
+            top -= 10; // Move upward (decrease top value)
             this.element.style.top = `${top}px`;
 
             // Check collision with any shield pixel
@@ -176,28 +191,42 @@ export class Bullet extends Field {
 
             for (let invader of allInvaders) {
                 const invaderRect = invader.getBoundingClientRect();
-                
-                const isCollidingWithInvader = 
+
+                const isCollidingWithInvader =
                     bulletRect.left < invaderRect.right &&
                     bulletRect.right > invaderRect.left &&
                     bulletRect.top < invaderRect.bottom &&
                     bulletRect.bottom > invaderRect.top;
 
                 if (isCollidingWithInvader) {
+
+                    let score = document.getElementById("score_number")
+                    let number = parseInt(score.innerText)
+                    console.log("score: ", number)
+                    console.log("score: ", score)
+                    number += 10
+                    score.innerText = number
+
                     invader.remove(); // Remove the invader
                     this.element.remove(); // Remove the bullet
                     return;
                 }
             }
 
+            // If bullet still on screen, continue
+            const container = document.querySelector(".battle_field");
+            const containerHeight = container.clientHeight;
+
+            console.log("container height: ", containerHeight);
+
+
             // Continue animation if bullet is still on screen (moving upward)
-            if (top > -10) { // Stop when bullet goes off-screen at top
+            if (top >= 100) { // Stop when bullet goes off-screen at top
                 requestAnimationFrame(moveBullet);
             } else {
                 this.element.remove(); // Remove bullet if out of screen
             }
         };
-        
         requestAnimationFrame(moveBullet);
     }
 }
