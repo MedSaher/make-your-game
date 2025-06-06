@@ -5,10 +5,12 @@ import { Invaders_container } from "./invaders_container.js";
 import { Shield } from "./shields.js";
 
 export class Controller {
+    
     constructor() {
         this.main_color = `#000000`
         this.grand_parent = document.body
     }
+
     run_game() {
             //Instantiate the field class:
             let field = new Field(60, 80 , "battle_field", this.grand_parent, this.maincolor)
