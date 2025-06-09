@@ -33,6 +33,7 @@ export class Controller {
             let shields = new Shield(60, 4, "shields", field_tag)
             shields.create()
             shields.add_shields()
+            
     }
 
     attach_pause_listener() {
@@ -52,3 +53,7 @@ export class Controller {
         });
     }
 }
+
+export const themeMusic = new Audio("sounds/spaceinvaders1.mpeg");
+themeMusic.loop = true;
+themeMusic.volume = 0.3; // Adjust as needed

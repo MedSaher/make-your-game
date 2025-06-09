@@ -4,7 +4,7 @@ import { Controller } from "./controller.js";
 var score = 0
 
 export class Bullet extends Field {
-    
+
     #last_call = 0
 
     // Invaders drop the bomb:
@@ -13,6 +13,12 @@ export class Bullet extends Field {
         this.element.style.position = "absolute";
         this.element.style.top = `${startTop}px`;
         this.element.style.left = `${startLeft}px`;
+
+        const shootSound = new Audio("sounds/shoot2.wav");
+            shootSound.volume = 0.9; // Optional: adjust volume (0.0 to 1.0)
+            shootSound.play().catch((e) => {
+                console.warn("Failed to play sound:", e);
+            });
 
         // Animate the bullet downward
         this.InvaderpullsTrigger();
@@ -30,6 +36,11 @@ export class Bullet extends Field {
         if (now - this.#last_call >= 1000) {
             this.#last_call = now;
             this.create(); // Use Field.create() to render the bullet
+            const shootSound = new Audio("sounds/shoot.wav");
+            shootSound.volume = 0.9; // Optional: adjust volume (0.0 to 1.0)
+            shootSound.play().catch((e) => {
+                console.warn("Failed to play sound:", e);
+            });
             this.element.style.position = "absolute";
             this.element.style.top = `${startTop}px`;
             this.element.style.left = `${startLeft}px`;
@@ -135,6 +146,12 @@ export class Bullet extends Field {
     destroyShieldPixelAndNeighbors(shieldElement, row, col) {
         const localPixels = shieldElement.querySelectorAll(".shield-cell");
 
+        const shootSound = new Audio("sounds/shipexplosion.wav");
+            shootSound.volume = 0.9; // Optional: adjust volume (0.0 to 1.0)
+            shootSound.play().catch((e) => {
+                console.warn("Failed to play sound:", e);
+            });
+
         for (let pixel of localPixels) {
             const r = parseInt(pixel.dataset.row)
             const c = parseInt(pixel.dataset.col)
@@ -229,7 +246,7 @@ export class Bullet extends Field {
                 this.element.remove(); // Remove bullet if out of screen
             }
         };
-        
+
         requestAnimationFrame(moveBullet);
     }
 }
