@@ -28,7 +28,7 @@ export class Invaders_container extends Field {
             section.style.height = `${this.height / 5}vmin`;
 
             for (let j = 1; j <= 7; j++) {
-                let invader = new Invader(((this.width / 7) + 6), ((this.height / 4) - 1), `type1`, section, null, null, this.type);
+                let invader = new Invader(((this.width/7) * 10), ((this.height / 4) * 8), `type1`, section, null, null, this.type, "px");
                 invader.create();
                 this.invaders.push(invader);
             }

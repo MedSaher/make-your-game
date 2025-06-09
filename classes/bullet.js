@@ -1,9 +1,10 @@
 import { Field } from "./field.js";
+import { Controller } from "./controller.js";
 
 var score = 0
 
 export class Bullet extends Field {
-
+    
     #last_call = 0
 
     // Invaders drop the bomb:
@@ -21,6 +22,11 @@ export class Bullet extends Field {
     shootUp(startTop, startLeft) {
         const now = Date.now();
 
+        const stuckBullets = document.querySelectorAll(".hero_bullet")
+        // remove stuck bullets from battle ground 
+        stuckBullets.forEach((bullet) => {
+            bullet.remove();
+        })
         if (now - this.#last_call >= 1000) {
             this.#last_call = now;
             this.create(); // Use Field.create() to render the bullet
@@ -83,13 +89,11 @@ export class Bullet extends Field {
                 if (isCollidingWithHero) {
                     let lives = document.getElementById("lives_number")
                     let number = parseInt(lives.innerText)
-                    console.log("lives: ", number)
-                    console.log("lives: ", score)
                     number -= 1
                     lives.innerText = number
                     setTimeout(() => {
-                        heroElement.remove() // remove the hero
-                    }, 1000)
+                        heroElement.remove()
+                    }, 1)
                     this.element.remove(); // remove the bullet
                     return;
                 }
@@ -120,8 +124,6 @@ export class Bullet extends Field {
 
                     const top = heroRect.top - battlefieldRect.top;
                     const left = heroRect.left - battlefieldRect.left + (heroRect.width / 2);
-
-                    console.log("the top is: ", top, "the left is: ", left);
 
                     // Now this.shootUp works because 'this' is your Bullet instance
                     this.shootUp(top, left)
@@ -202,12 +204,14 @@ export class Bullet extends Field {
 
                     let score = document.getElementById("score_number")
                     let number = parseInt(score.innerText)
-                    console.log("score: ", number)
-                    console.log("score: ", score)
                     number += 10
                     score.innerText = number
 
-                    invader.remove(); // Remove the invader
+                    invader.classList.remove("type1", "type2", "invader");
+                    invader.style.backgroundImage = "none";
+                    invader.style.backgroundColor = "transparent"; // or a hit effect
+                    invader.style.border = "none";
+                    invader.setAttribute("data-dead", "true");
                     this.element.remove(); // Remove the bullet
                     return;
                 }
@@ -217,8 +221,6 @@ export class Bullet extends Field {
             const container = document.querySelector(".battle_field");
             const containerHeight = container.clientHeight;
 
-            console.log("container height: ", containerHeight);
-
 
             // Continue animation if bullet is still on screen (moving upward)
             if (top >= 100) { // Stop when bullet goes off-screen at top
@@ -227,6 +229,7 @@ export class Bullet extends Field {
                 this.element.remove(); // Remove bullet if out of screen
             }
         };
+        
         requestAnimationFrame(moveBullet);
     }
 }

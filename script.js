@@ -5,4 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let controller = new Controller()
     controller.run_game()
 
+        controller.attach_pause_listener();
+
+    document.getElementById("restart_btn").addEventListener("click", () => {
+        location.reload(); // Or a custom reset logic
+    });
 })

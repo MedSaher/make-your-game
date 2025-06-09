@@ -9,6 +9,7 @@ export class Controller {
     constructor() {
         this.main_color = `#000000`
         this.grand_parent = document.body
+        this.paused = false;
     }
 
     run_game() {
@@ -32,5 +33,22 @@ export class Controller {
             let shields = new Shield(60, 4, "shields", field_tag)
             shields.create()
             shields.add_shields()
+    }
+
+    attach_pause_listener() {
+        const pause_btn = document.getElementById("pause_btn");
+        if (!pause_btn) return;
+
+        pause_btn.addEventListener("click", () => {
+            this.paused = !this.paused;
+
+            // Toggle icon
+            pause_btn.innerHTML = this.paused
+                ? `<i class="fas fa-play"></i>`
+                : `<i class="fas fa-pause"></i>`;
+
+            // Inform all moving parts
+            document.dispatchEvent(new CustomEvent("togglePause", { detail: { paused: this.paused } }));
+        });
     }
 }
