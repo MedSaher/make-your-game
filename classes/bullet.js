@@ -15,10 +15,10 @@ export class Bullet extends Field {
         this.element.style.left = `${startLeft}px`;
 
         const shootSound = new Audio("sounds/shoot2.wav");
-            shootSound.volume = 0.9; // Optional: adjust volume (0.0 to 1.0)
-            shootSound.play().catch((e) => {
-                console.warn("Failed to play sound:", e);
-            });
+        shootSound.volume = 0.9; // Optional: adjust volume (0.0 to 1.0)
+        shootSound.play().catch((e) => {
+            console.warn("Failed to play sound:", e);
+        });
 
         // Animate the bullet downward
         this.InvaderpullsTrigger();
@@ -102,11 +102,23 @@ export class Bullet extends Field {
                     let number = parseInt(lives.innerText)
                     number -= 1
                     lives.innerText = number
-                    setTimeout(() => {
-                        heroElement.remove()
-                    }, 1)
-                    this.element.remove(); // remove the bullet
-                    return;
+
+                    // Remove hero temporarily
+                    heroElement.style.display = "none";
+
+                    // Remove the bullet
+                    this.element.remove();
+
+                    // If the player still has lives, bring hero back after delay
+                    if (number > 0) {
+                        setTimeout(() => {
+                            // heroElement.style.left = "calc((100% - 8vmin) / 2)";
+                            heroElement.style.display = "block";
+                        }, 2000); // Delay 1 second before respawn
+                    } else {
+                        // Game Over logic (optional)
+                        console.log("Game Over");
+                    }
                 }
             }
 
@@ -147,10 +159,10 @@ export class Bullet extends Field {
         const localPixels = shieldElement.querySelectorAll(".shield-cell");
 
         const shootSound = new Audio("sounds/shipexplosion.wav");
-            shootSound.volume = 0.9; // Optional: adjust volume (0.0 to 1.0)
-            shootSound.play().catch((e) => {
-                console.warn("Failed to play sound:", e);
-            });
+        shootSound.volume = 0.9; // Optional: adjust volume (0.0 to 1.0)
+        shootSound.play().catch((e) => {
+            console.warn("Failed to play sound:", e);
+        });
 
         for (let pixel of localPixels) {
             const r = parseInt(pixel.dataset.row)

@@ -25,9 +25,6 @@ export class Field {
         if (this.image_path) {
             container.style.backgroundImage = `url(${this.image_path})`
         }
-        if (this.type) {
-            console.log(type)
-        }
         this.parent_element.appendChild(container)
         this.element = container
     }
