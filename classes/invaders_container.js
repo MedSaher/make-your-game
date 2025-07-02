@@ -1,6 +1,7 @@
 import { Field } from "./field.js";
 import { Invader } from "./invaders.js";
 import { Bullet } from "./bullet.js";
+import {app_state} from "../utils/app_state.js"
 
 export class Invaders_container extends Field {
     constructor(...args) {
@@ -12,6 +13,9 @@ export class Invaders_container extends Field {
         this.currentType = "type1"; // Initial type
         this.lastToggleTime = 0;
         this.toggleInterval = 300;
+        this.paused = false; // default state to false;
+        this.animation_id = null;
+        this.attach_pause_event_listener()
     }
 
     add_invaders(element) {
@@ -40,7 +44,13 @@ export class Invaders_container extends Field {
         setInterval(() => this.dropRandomBullet(), 5000);
         requestAnimationFrame(this.move_invaders.bind(this));
     }
+
+    // handle the invaders movements:
     move_invaders(timestamp) {
+        if(this.paused){
+            // return if the state is paused:
+            return
+        }
         const container = document.querySelector(".battle_field");
         const containerRect = container.getBoundingClientRect();
 
@@ -72,7 +82,7 @@ export class Invaders_container extends Field {
             this.invaders.forEach(invader => invader.toggleType());
             this.lastToggleTime = timestamp;
         }
-        requestAnimationFrame(this.move_invaders.bind(this));
+        this.animation_id = requestAnimationFrame(this.move_invaders.bind(this));
     }
     dropRandomBullet() {
     if (this.invaders.length === 0) return;
@@ -95,9 +105,23 @@ export class Invaders_container extends Field {
     bullet.drop(top, left);
 }
 
+// attach the pause event listener:
+attach_pause_event_listener() {
+    document.addEventListener("togglePause", (e) => {
+        this.paused = e.detail.paused;
 
-
-
-
-
+        if (this.paused) {
+            app_state.game_paused = true
+            // Stop the animation immediately
+            if (this.animation_id) {
+                cancelAnimationFrame(this.animation_id);
+                this.animation_id = null;
+            }
+        } else {
+              app_state.game_paused = false
+            // Resume
+            this.animation_id = requestAnimationFrame(this.move_invaders.bind(this));
+        }
+    });
+}
 }

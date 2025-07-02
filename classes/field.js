@@ -126,7 +126,4 @@ create_score_displayer() {
     // Insert into DOM
     this.element.insertBefore(advancement, this.element.firstChild);
 }
-
-
-
 }

@@ -29,6 +29,8 @@ body {
     background-color: black;
     font-family: monospace;
     padding-bottom: 4px;
+    min-width: 400px;
+    min-height: 420px;
 }
 
 .invaders_container {
@@ -36,6 +38,8 @@ body {
     /* border: 1px white solid; */
     left: calc((100% - 40vmin) / 2);
     top: 22vmin;
+    min-width: 200px;
+    min-height: 150px;
 }
 
 .invaders_section {
@@ -45,6 +49,7 @@ body {
     align-items: center;
     gap: 1vmin;
     width: 12vmin;
+
 }
 
 .hero_tag {
@@ -65,6 +70,8 @@ body {
     justify-content: space-evenly;
     align-items: center;
     bottom: 12vmin;
+    min-width: 100%;
+    min-height: auto;
 }
 
 .shields {
@@ -99,6 +106,7 @@ body {
     border-bottom: 2px solid #00FF00;
     padding: 10px;
     box-sizing: border-box;
+    min-width: 100%;
 }
 
 #score_container,

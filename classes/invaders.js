@@ -14,5 +14,4 @@ export class Invader extends Field {
     pullTheTrigger(){
         const bullet = new Bullet(1.2, 2.5, "invader_bullet", battlefield, null, "sprites/Projectiles/ProjectileC_4.png");
     }
-
 }
