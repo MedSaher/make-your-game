@@ -184,6 +184,7 @@ export class Field {
         text.textContent = message
         let res = document.getElementById("restart_btn")
         res.style.display = "none"
+        pause.style.display = "none"
         let restart_btn = document.createElement("button");
         restart_btn.setAttribute("id", "restart_btn");
         restart_btn.innerHTML = `<i class="fas fa-rotate-right"></i>`;
