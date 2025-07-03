@@ -66,7 +66,7 @@ export class Controller extends Field {
                 const formattedMin = min.toString().padStart(2, '0');
                 const formattedSecs = secs.toString().padStart(2, '0');
                 time_display.textContent = `${formattedMin}:${formattedSecs}`;
-                if (secs == 5){
+                if (min == 2){
                     this.handle_game_over("Time's up!")
                 }
             }
@@ -77,4 +77,4 @@ export class Controller extends Field {
 
 export const themeMusic = new Audio("sounds/spaceinvaders1.mpeg");
 themeMusic.loop = true;
-themeMusic.volume = 0.0; // Adjust as needed
+themeMusic.volume = 0.8; // Adjust as needed
