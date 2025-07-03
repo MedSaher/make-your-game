@@ -26,7 +26,7 @@ export class InvadersBullet extends Field {
         this.element.style.left = `${startLeft}px`;
 
         const shootSound = new Audio("sounds/shoot2.wav");
-        shootSound.volume = 0.0; // Optional: adjust volume (0.0 to 1.0)
+        shootSound.volume = 0.7; // Optional: adjust volume (0.0 to 1.0)
         shootSound.play().catch((e) => {
             console.warn("Failed to play sound:", e);
         });
@@ -195,7 +195,7 @@ export class HeroBullet extends Field {
             this.#last_call = now;
             this.create(); // Use Field.create() to render the bullet
             const shootSound = new Audio("sounds/shoot.wav");
-            shootSound.volume = 0.0; // Optional: adjust volume (0.0 to 1.0)
+            shootSound.volume = 0.7; // Optional: adjust volume (0.0 to 1.0)
             shootSound.play().catch((e) => {
                 console.warn("Failed to play sound:", e);
             });
@@ -279,7 +279,7 @@ export class HeroBullet extends Field {
                     invader.setAttribute("data-dead", "true");
                     setTimeout(() => {
                         invader.style.backgroundImage = "none";
-                        invader.style.backgroundColor = "transparent"; 
+                        invader.style.backgroundColor = "transparent";
                         invader.style.border = "none";
                     }, 500)
                     this.element.remove(); // Remove the bullet
@@ -305,6 +305,10 @@ export class HeroBullet extends Field {
 
 
     HeroPullsTheTrigger() {
+        const throttledShoot = this.throttle((top, left) => {
+            this.shootUp(top, left);
+        }, 1000);
+
         document.addEventListener('keydown', (event) => {
             if (event.code === 'Space') {
                 let heroElement = document.querySelectorAll(".hero_tag")[0];
@@ -317,12 +321,24 @@ export class HeroBullet extends Field {
                     const top = heroRect.top - battlefieldRect.top;
                     const left = heroRect.left - battlefieldRect.left + (heroRect.width / 2);
 
-                    // Now this.shootUp works because 'this' is your Bullet instance
-                    this.shootUp(top, left)
+                    throttledShoot(top, left); // Use throttled version
                 }
             }
         });
     }
+    throttle(fn, delay) {
+        let lastCall = 0;
+
+        return function (...args) {
+            const now = Date.now();
+
+            if (now - lastCall >= delay) {
+                lastCall = now;
+                fn.apply(this, args);
+            }
+        };
+    }
+
+
 
 }
-

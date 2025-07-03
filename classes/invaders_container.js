@@ -19,31 +19,43 @@ export class Invaders_container extends Field {
     }
 
     add_invaders(element) {
-        this.sections = []; // Reset before adding
+    this.sections = [];
 
-        for (let i = 1; i <= 4; i++) {
-            let section = document.createElement("div");
-            section.classList.add("invaders_section");
-            section.setAttribute("id", `section-${i}`);
-            section.style.position = "absolute"; // Important for movement
-            section.style.left = "0px";
-            section.style.top = `${(i - 1) * (this.height / 5)}vmin`;
-            section.style.width = `100%`;
-            section.style.height = `${this.height / 5}vmin`;
+    // Detect screen height to adjust spacing for small screens
+    const isSmallScreen = window.innerHeight < 700;
+    const spacingMultiplier = isSmallScreen ? 1.5 : 1.0; // more space if small
 
-            for (let j = 1; j <= 7; j++) {
-                let invader = new Invader(((this.width/7) * 10), ((this.height / 4) * 8), `type1`, section, null, null, this.type, "px");
-                invader.create();
-                this.invaders.push(invader);
-            }
+    for (let i = 1; i <= 4; i++) {
+        let section = document.createElement("div");
+        section.classList.add("invaders_section");
+        section.setAttribute("id", `section-${i}`);
+        section.style.position = "absolute";
+        section.style.left = "0px";
 
-            element.appendChild(section);
-            this.sections.push(section);
+        // Increase vertical spacing for small screens
+        section.style.top = `${(i - 1) * (this.height / 5) * spacingMultiplier}vmin`;
+        section.style.width = `100%`;
+        section.style.height = `${this.height / 5}vmin`;
+
+        for (let j = 1; j <= 7; j++) {
+            let invader = new Invader(
+                ((this.width / 7) * 10), 
+                ((this.height / 4) * 8), 
+                `type1`, section, null, null, this.type, "px"
+            );
+            invader.create();
+            this.invaders.push(invader);
         }
-        this.dropRandomBullet();
-        setInterval(() => this.dropRandomBullet(), 5000);
-        requestAnimationFrame(this.move_invaders.bind(this));
+
+        element.appendChild(section);
+        this.sections.push(section);
     }
+
+    this.dropRandomBullet();
+    setInterval(() => this.dropRandomBullet(), 5000);
+    requestAnimationFrame(this.move_invaders.bind(this));
+}
+
 
     // handle the invaders movements:
     move_invaders(timestamp) {

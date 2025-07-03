@@ -35,8 +35,7 @@ export class Field {
     create_score_displayer() {
         let advancement = document.createElement("div");
         advancement.setAttribute("id", "game_advancement");
-        advancement.style.width = `${this.width}vmin`;
-        advancement.style.height = `100px`;
+        advancement.style.height = `110px`;
         advancement.style.display = "flex";
         advancement.style.justifyContent = "space-between";
         advancement.style.alignItems = "center";
@@ -157,7 +156,7 @@ export class Field {
         const localPixels = shieldElement.querySelectorAll(".shield-cell");
 
         const shootSound = new Audio("sounds/shipexplosion.wav");
-        shootSound.volume = 0.0; // Optional: adjust volume (0.0 to 1.0)
+        shootSound.volume = 0.7; // Optional: adjust volume (0.0 to 1.0)
         shootSound.play().catch((e) => {
             console.warn("Failed to play sound:", e);
         });

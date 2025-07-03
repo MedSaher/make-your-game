@@ -15,7 +15,7 @@ export class Controller extends Field {
 
     run_game() {
         //Instantiate the field class:
-        let field = new Field(60, 80, "battle_field", this.parent_element, this.maincolor)
+        let field = new Field(90, 85, "battle_field", this.parent_element, this.maincolor)
         field.create()
         field.create_score_displayer()
         let field_tag = document.getElementsByClassName("battle_field")[0]
