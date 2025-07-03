@@ -219,7 +219,6 @@ export class HeroBullet extends Field {
 
             let top = parseFloat(this.element.style.top);
             let bot = parseFloat(this.element.style.bottom);
-            console.log("top: ", top, "bottom: ", bot);
 
             top -= 10; // Move upward (decrease top value)
             this.element.style.top = `${top}px`;
@@ -271,6 +270,12 @@ export class HeroBullet extends Field {
                     let number = app_state.score += 10
 
                     score.innerText = number
+
+
+                    // remove invader from invaders 
+                    let x = invader.getAttribute("data-x")
+                    let y = invader.getAttribute("data-y")
+                    console.log(this.invaders);
 
 
 

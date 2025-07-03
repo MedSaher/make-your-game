@@ -1,19 +1,22 @@
 export class Field {
     // new Field(60, 80, "battle_field", grand_parent, main_color)
-    constructor(width, height, tag_class, parent_element, background_color = null, image_path = null, type = null, unit = "vmin") {
+    constructor(width, height, tag_class, parent_element, background_color = null, image_path = null, type = null, unit = "vmin", x = 0, y = 0) {
         this.width = width
         this.height = height
         this.tag_class = tag_class
+        this.invaders = []; // Store invader objects
         this.parent_element = parent_element
         this.background_color = background_color
         this.image_path = image_path
         this.type = type
         this.unit = unit
         this.element = null
+        this.x = x
+        this.y = y
     }
 
     // Create the html representation:
-    create() {
+    create(x = 0, y = 0) {
         let container = document.createElement("div")
         container.classList.add(this.tag_class)
         container.style.width = `${this.width}${this.unit}`
@@ -25,9 +28,8 @@ export class Field {
         if (this.image_path) {
             container.style.backgroundImage = `url(${this.image_path})`
         }
-        if (this.type) {
-            console.log(type)
-        }
+        container.setAttribute("data-x", x)
+        container.setAttribute("data-y", y)
         this.parent_element.appendChild(container)
         this.element = container
     }

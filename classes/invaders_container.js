@@ -9,7 +9,6 @@ export class Invaders_container extends Field {
         this.direction = 1; // 1 for right, -1 for left
         this.speed = 1; // speed in pixels per frame
         this.sections = [];
-        this.invaders = []; // Store invader objects
         this.currentType = "type1"; // Initial type
         this.lastToggleTime = 0;
         this.toggleInterval = 300;
@@ -41,10 +40,12 @@ export class Invaders_container extends Field {
             let invader = new Invader(
                 ((this.width / 7) * 10), 
                 ((this.height / 4) * 8), 
-                `type1`, section, null, null, this.type, "px"
+                `type1`, section, null, null, this.type, "px", i, j
             );
-            invader.create();
+            invader.create(i, j);
+            
             this.invaders.push(invader);
+            
         }
 
         element.appendChild(section);
@@ -101,7 +102,7 @@ export class Invaders_container extends Field {
 
     const aliveInvaders = this.invaders.filter(inv => inv.element && inv.element.parentElement);
     if (aliveInvaders.length === 0) return;
-
+        
     const randomInvader = aliveInvaders[Math.floor(Math.random() * aliveInvaders.length)];
 
     const invaderRect = randomInvader.element.getBoundingClientRect();
