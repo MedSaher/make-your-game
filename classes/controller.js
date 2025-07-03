@@ -4,17 +4,18 @@ import { Hero } from "./hero.js";
 import { Invaders_container } from "./invaders_container.js";
 import { Shield } from "./shields.js";
 
-export class Controller {
+export class Controller extends Field {
 
-    constructor() {
+    constructor(...args) {
+        super(...args)
         this.main_color = `#000000`
-        this.grand_parent = document.body
+        this.parent_element = document.body
         this.paused = false;
     }
 
     run_game() {
         //Instantiate the field class:
-        let field = new Field(60, 80, "battle_field", this.grand_parent, this.maincolor)
+        let field = new Field(60, 80, "battle_field", this.parent_element, this.maincolor)
         field.create()
         field.create_score_displayer()
         let field_tag = document.getElementsByClassName("battle_field")[0]
@@ -38,6 +39,7 @@ export class Controller {
 
     attach_pause_listener() {
         const pause_btn = document.getElementById("pause_btn");
+        const time_display = document.getElementById("time_display");
         if (!pause_btn) return;
 
         pause_btn.addEventListener("click", () => {
@@ -51,7 +53,26 @@ export class Controller {
             // Inform all moving parts
             document.dispatchEvent(new CustomEvent("togglePause", { detail: { paused: this.paused } }));
         });
+        let min = 0
+        let secs = 0
+        setInterval(() => {
+            if (!this.paused) {
+                secs++;
+                if (secs === 60) {
+                    secs = 0;
+                    min++;
+                }
+                // Format with leading zeros
+                const formattedMin = min.toString().padStart(2, '0');
+                const formattedSecs = secs.toString().padStart(2, '0');
+                time_display.textContent = `${formattedMin}:${formattedSecs}`;
+                if (secs == 5){
+                    this.handle_game_over("Time's up!")
+                }
+            }
+        }, 1000)
     }
+
 }
 
 export const themeMusic = new Audio("sounds/spaceinvaders1.mpeg");

@@ -199,7 +199,6 @@ export class Field {
         restart_btn.addEventListener("click", () => {
             location.reload();
         });
-
         game_over.append(text, restart_btn)
         this.parent_element.append(game_over)
     }
