@@ -1,6 +1,6 @@
 import { Field } from "./field.js";
 import { Invader } from "./invaders.js";
-import { Bullet } from "./bullet.js";
+import { InvadersBullet } from "./bullet.js";
 import {app_state} from "../utils/app_state.js"
 
 export class Invaders_container extends Field {
@@ -101,7 +101,7 @@ export class Invaders_container extends Field {
     const left = invaderRect.left - battlefieldRect.left + (invaderRect.width / 2);
 
     // Create bullet and drop it
-    const bullet = new Bullet(1, 2, "invader_bullet", battlefield, null, "sprites/Projectiles/ProjectileC_1.png");
+    const bullet = new InvadersBullet(1, 2, "invader_bullet", battlefield, null, "sprites/Projectiles/ProjectileC_1.png");
     bullet.drop(top, left);
 }
 
