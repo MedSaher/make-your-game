@@ -1,5 +1,5 @@
 import { Field } from "./field.js";
-import { Bullet } from "./bullet.js";
+import { InvadersBullet } from "./bullet.js";
 
 export class Invader extends Field {
     toggleType() {
@@ -12,7 +12,6 @@ export class Invader extends Field {
         }
     }
     pullTheTrigger(){
-        const bullet = new Bullet(1.2, 2.5, "invader_bullet", battlefield, null, "sprites/Projectiles/ProjectileC_4.png");
+        const bullet = new InvadersBullet(1.2, 2.5, "invader_bullet", battlefield, null, "sprites/Projectiles/ProjectileC_4.png");
     }
-
 }

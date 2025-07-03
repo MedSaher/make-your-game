@@ -3,8 +3,8 @@ import { Field } from "./field.js";
 
 export class Hero extends Field {
   move_hero() {
-    const step = 5; // pixels per arrow key press
-    let position = 0; // track translateX offset
+    const step = 5;
+    let position = 0;
     let keys = new Set();
 
     const move = () => {
